@@ -1,0 +1,18 @@
+{
+  "name": "trakel-image-proxy",
+  "version": "1.0.0",
+  "description": "Image proxy service for Trakel.org",
+  "main": "imageProxy.js",
+  "scripts": {
+    "start": "node imageProxy.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "axios": "^1.13.2",
+    "cheerio": "^1.1.2"
+  }
+}
