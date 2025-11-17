@@ -66,8 +66,8 @@ app.post("/api/extract-image-url", async (req, res) => {
 
     console.log(`✅ Resim bulundu: ${absoluteUrl}`);
 
-    // Proxy URL oluştur
-    const proxyUrl = `${req.protocol}://${req.get(
+    // Proxy URL oluştur - HER ZAMAN HTTPS kullan
+    const proxyUrl = `https://${req.get(
       "host"
     )}/api/image-proxy?url=${encodeURIComponent(absoluteUrl)}`;
 
