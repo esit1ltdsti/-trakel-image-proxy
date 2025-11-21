@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
   });
 });
 
+
 // Trakel.org'dan asıl resim linkini çıkar
 app.post("/api/extract-image-url", async (req, res) => {
   try {
@@ -119,6 +120,34 @@ app.get("/api/image-proxy", async (req, res) => {
   } catch (error) {
     console.error(`❌ Image proxy hatası:`, error.message);
     res.status(500).json({ error: "Resim yüklenemedi" });
+  }
+});
+
+
+const sql = require("mssql");
+
+// SQL bağlantı test endpoint'i
+app.get("/api/sql-test", async (req, res) => {
+  try {
+    const config = {
+      user: "trakel_user",
+      password: "trakel2025!",
+      server: "94.102.74.13", // IP adresi
+      database: "trakel_db",
+      options: {
+        encrypt: false,
+        trustServerCertificate: true,
+      },
+      port: 1433, // default SQL Server portu
+    };
+
+    await sql.connect(config);
+    const result = await sql.query("SELECT COUNT(*) AS count FROM photographers");
+    await sql.close();
+
+    res.json({ success: true, count: result.recordset[0].count });
+  } catch (error) {
+    res.json({ success: false, error: error.message });
   }
 });
 
